@@ -17,12 +17,25 @@ class Event
     end
   end
 
-
-  def food_trucks_that_sell(item)
-    answer = @food_trucks.find_all do |truck|
-      if truck.check_stock(item) == item
-        truck.name
+  def item
+    @food_truck.map do |truck|
+      truck.inventory.keys.each do |key|
+        item_array << key
       end
     end
   end
+
+
+  def food_trucks_that_sell(item)
+    answer = []
+    require'pry'; binding.pry
+    @food_trucks.each do |truck|
+      if truck.check_stock(item) == item
+        answer << truck
+      end
+    end
+    answer
+  end
+
+
 end
